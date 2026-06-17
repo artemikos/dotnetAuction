@@ -1,0 +1,349 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\dotnetAuction\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\services\\auctioncompletionworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\services\\auctioncompletionworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\views\\auctions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\views\\auctions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\controllers\\auctionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\dtos\\auctiondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\dtos\\auctiondtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\dtos\\biddtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\dtos\\biddtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\services\\bidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\services\\bidservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\services\\auctionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\services\\auctionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\data\\auctiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\data\\auctiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\models\\domainmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\models\\domainmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\views\\auctions\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\views\\auctions\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\views\\auctions\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\views\\auctions\\detail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\views\\auctions\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\views\\auctions\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|d:\\dotnetauction\\auction\\views\\shared\\_authmodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{89678DEE-829B-4535-A307-DAEB66817C74}|Auction\\Auction.csproj|solutionrelative:auction\\views\\shared\\_authmodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC3EB801-A7FD-4E1C-9525-B9F8C7BDACD8}|Auction.Tests\\Auction.Tests.csproj|d:\\dotnetauction\\auction.tests\\concurrentbiddingtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC3EB801-A7FD-4E1C-9525-B9F8C7BDACD8}|Auction.Tests\\Auction.Tests.csproj|solutionrelative:auction.tests\\concurrentbiddingtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC3EB801-A7FD-4E1C-9525-B9F8C7BDACD8}|Auction.Tests\\Auction.Tests.csproj|d:\\dotnetauction\\auction.tests\\auctioncompletiontests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC3EB801-A7FD-4E1C-9525-B9F8C7BDACD8}|Auction.Tests\\Auction.Tests.csproj|solutionrelative:auction.tests\\auctioncompletiontests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AC3EB801-A7FD-4E1C-9525-B9F8C7BDACD8}|Auction.Tests\\Auction.Tests.csproj|d:\\dotnetauction\\auction.tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AC3EB801-A7FD-4E1C-9525-B9F8C7BDACD8}|Auction.Tests\\Auction.Tests.csproj|solutionrelative:auction.tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuctionCompletionWorker.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Services\\AuctionCompletionWorker.cs",
+              "RelativeDocumentMoniker": "Auction\\Services\\AuctionCompletionWorker.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Services\\AuctionCompletionWorker.cs",
+              "RelativeToolTip": "Auction\\Services\\AuctionCompletionWorker.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAIwI0AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T07:09:40.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "Auction\\Services\\AuthService.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Services\\AuthService.cs",
+              "RelativeToolTip": "Auction\\Services\\AuthService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T07:09:18.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AuctionService.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Services\\AuctionService.cs",
+              "RelativeDocumentMoniker": "Auction\\Services\\AuctionService.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Services\\AuctionService.cs",
+              "RelativeToolTip": "Auction\\Services\\AuctionService.cs",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAuwNsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T07:06:39.009Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuctionsController.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Controllers\\AuctionsController.cs",
+              "RelativeDocumentMoniker": "Auction\\Controllers\\AuctionsController.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Controllers\\AuctionsController.cs",
+              "RelativeToolTip": "Auction\\Controllers\\AuctionsController.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAowDYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T07:05:53.772Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuctionDtos.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\DTOs\\AuctionDtos.cs",
+              "RelativeDocumentMoniker": "Auction\\DTOs\\AuctionDtos.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\DTOs\\AuctionDtos.cs",
+              "RelativeToolTip": "Auction\\DTOs\\AuctionDtos.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAiwDMAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T07:04:37.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BidDtos.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\DTOs\\BidDtos.cs",
+              "RelativeDocumentMoniker": "Auction\\DTOs\\BidDtos.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\DTOs\\BidDtos.cs",
+              "RelativeToolTip": "Auction\\DTOs\\BidDtos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T07:04:20.61Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DomainModels.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Models\\DomainModels.cs",
+              "RelativeDocumentMoniker": "Auction\\Models\\DomainModels.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Models\\DomainModels.cs",
+              "RelativeToolTip": "Auction\\Models\\DomainModels.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAQwCUAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:57:44.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BidService.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Services\\BidService.cs",
+              "RelativeDocumentMoniker": "Auction\\Services\\BidService.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Services\\BidService.cs",
+              "RelativeToolTip": "Auction\\Services\\BidService.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAowAAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:54:21.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NotificationService.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Services\\NotificationService.cs",
+              "RelativeDocumentMoniker": "Auction\\Services\\NotificationService.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Services\\NotificationService.cs",
+              "RelativeToolTip": "Auction\\Services\\NotificationService.cs",
+              "ViewState": "AgIAADoAAAAAAAAAAAAowGUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:53:05.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Create.cshtml",
+              "RelativeDocumentMoniker": "Auction\\Views\\Auctions\\Create.cshtml",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Create.cshtml",
+              "RelativeToolTip": "Auction\\Views\\Auctions\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T06:52:48.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Detail.cshtml",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Detail.cshtml",
+              "RelativeDocumentMoniker": "Auction\\Views\\Auctions\\Detail.cshtml",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Detail.cshtml",
+              "RelativeToolTip": "Auction\\Views\\Auctions\\Detail.cshtml",
+              "ViewState": "AgIAAHgAAAAAAAAAAAD4v5YAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T06:52:28.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Auction\\Views\\Auctions\\Edit.cshtml",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Edit.cshtml",
+              "RelativeToolTip": "Auction\\Views\\Auctions\\Edit.cshtml",
+              "ViewState": "AgIAAFYAAAAAAAAAAADgvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T06:52:24.718Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Index.cshtml",
+              "RelativeDocumentMoniker": "Auction\\Views\\Auctions\\Index.cshtml",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Views\\Auctions\\Index.cshtml",
+              "RelativeToolTip": "Auction\\Views\\Auctions\\Index.cshtml",
+              "ViewState": "AgIAAJMAAAAAAAAAAADwv78AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T06:52:20.278Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Auction\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Auction\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALsAAAAAAAAAAADwv88AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T06:50:52.964Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_AuthModal.cshtml",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Views\\Shared\\_AuthModal.cshtml",
+              "RelativeDocumentMoniker": "Auction\\Views\\Shared\\_AuthModal.cshtml",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Views\\Shared\\_AuthModal.cshtml",
+              "RelativeToolTip": "Auction\\Views\\Shared\\_AuthModal.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T06:50:35.471Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AuctionDbContext.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Data\\AuctionDbContext.cs",
+              "RelativeDocumentMoniker": "Auction\\Data\\AuctionDbContext.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Data\\AuctionDbContext.cs",
+              "RelativeToolTip": "Auction\\Data\\AuctionDbContext.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAmwEgAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:36:28.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ConcurrentBiddingTests.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction.Tests\\ConcurrentBiddingTests.cs",
+              "RelativeDocumentMoniker": "Auction.Tests\\ConcurrentBiddingTests.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction.Tests\\ConcurrentBiddingTests.cs",
+              "RelativeToolTip": "Auction.Tests\\ConcurrentBiddingTests.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:25:02.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AuctionCompletionTests.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction.Tests\\AuctionCompletionTests.cs",
+              "RelativeDocumentMoniker": "Auction.Tests\\AuctionCompletionTests.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction.Tests\\AuctionCompletionTests.cs",
+              "RelativeToolTip": "Auction.Tests\\AuctionCompletionTests.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:24:21.029Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "TestBase.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction.Tests\\TestBase.cs",
+              "RelativeDocumentMoniker": "Auction.Tests\\TestBase.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction.Tests\\TestBase.cs",
+              "RelativeToolTip": "Auction.Tests\\TestBase.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwGEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:23:15.65Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\dotnetAuction\\Auction\\Program.cs",
+              "RelativeDocumentMoniker": "Auction\\Program.cs",
+              "ToolTip": "D:\\dotnetAuction\\Auction\\Program.cs",
+              "RelativeToolTip": "Auction\\Program.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAIAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T06:19:26.99Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

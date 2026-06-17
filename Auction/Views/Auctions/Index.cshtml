@@ -1,0 +1,191 @@
+@model List<Auction.DTOs.AuctionSummaryDto>
+@{
+    ViewData["Title"] = "Auctions";
+    Layout = "_Layout";
+    var category = Context.Request.Query["category"].ToString();
+    var status   = Context.Request.Query["status"].ToString();
+    var sort     = Context.Request.Query["sort"].ToString();
+    var search   = Context.Request.Query["search"].ToString();
+    if (string.IsNullOrEmpty(status)) status = "Active";
+    if (string.IsNullOrEmpty(sort))   sort   = "ending_soon";
+}
+
+<div class="bg-gradient-to-br from-swamp-800 to-swamp-600 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-8 sm:py-10">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-black">Lily Market</h1>
+                <p class="mt-1 text-swamp-200 font-semibold">Campus-only auctions. Bid, win, meet up.</p>
+            </div>
+            <div class="relative max-w-xl flex-1">
+                <form method="get" action="/auctions">
+                    <input type="hidden" name="category" value="@category">
+                    <input type="hidden" name="status"   value="@status">
+                    <input type="hidden" name="sort"     value="@sort">
+                    <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-swamp-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+                    </svg>
+                    <input type="text" name="search" value="@search" placeholder="Search listings..."
+                           class="w-full pl-11 pr-4 py-3 rounded-full bg-white/15 border border-white/30 text-white placeholder-swamp-300 font-semibold focus:outline-none focus:bg-white/25 transition-all" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white border-b border-swamp-100">
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="flex gap-2 overflow-x-auto pb-1">
+            <a href="/auctions?status=@status&sort=@sort&search=@search"
+               class="filter-chip @(string.IsNullOrEmpty(category) ? "active" : "") px-4 py-1.5 rounded-full border border-swamp-200 text-sm font-medium">All</a>
+            @foreach (var cat in new[] { "Books", "Tech", "Furniture", "Clothing", "Sports", "Art" })
+            {
+                <a href="/auctions?category=@cat&status=@status&sort=@sort&search=@search"
+                   class="filter-chip @(category == cat ? "active" : "") px-4 py-1.5 rounded-full border border-swamp-200 text-sm font-medium text-swamp-600">
+                    @(cat switch { "Books" => "📚", "Tech" => "💻", "Furniture" => "🪑", "Clothing" => "👕", "Sports" => "🏋️", _ => "🎨" }) @cat
+                </a>
+            }
+        </div>
+        <div class="flex items-center justify-between mt-3">
+            <p class="text-sm text-swamp-500"><span class="font-semibold text-swamp-700">@Model.Count</span> auctions</p>
+            <form method="get" action="/auctions">
+                <input type="hidden" name="category" value="@category">
+                <input type="hidden" name="status"   value="@status">
+                <input type="hidden" name="search"   value="@search">
+                <select name="sort" onchange="this.form.submit()" class="text-sm border border-swamp-200 rounded-full px-3 py-1.5 bg-white text-swamp-700">
+                    <option value="ending_soon" selected="@(sort == "ending_soon")">Ending soon</option>
+                    <option value="newest"      selected="@(sort == "newest")">Newest first</option>
+                    <option value="price_asc"   selected="@(sort == "price_asc")">Price: low to high</option>
+                    <option value="price_desc"  selected="@(sort == "price_desc")">Price: high to low</option>
+                    <option value="most_bids"   selected="@(sort == "most_bids")">Most bids</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 py-3 flex gap-2">
+    <a href="/auctions?status=Active&category=@category&sort=@sort&search=@search"
+       class="status-chip @(status == "Active" ? "active" : "") px-4 py-1.5 rounded-full border border-swamp-200 text-sm font-medium @(status == "Active" ? "" : "text-swamp-600")">🟢 Active</a>
+    <a href="/auctions?status=Ended&category=@category&sort=@sort&search=@search"
+       class="status-chip @(status == "Ended" ? "active" : "") px-4 py-1.5 rounded-full border border-swamp-200 text-sm font-medium @(status == "Ended" ? "" : "text-swamp-600")">🏁 Ended</a>
+    <a href="/auctions?status=Sold&category=@category&sort=@sort&search=@search"
+       class="status-chip @(status == "Sold" ? "active" : "") px-4 py-1.5 rounded-full border border-swamp-200 text-sm font-medium @(status == "Sold" ? "" : "text-swamp-600")">💰 Sold</a>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="flex items-center gap-2 mb-4">
+        <span class="live-dot w-2 h-2 rounded-full bg-swamp-500"></span>
+        <span class="text-xs font-medium text-swamp-600">Live updates</span>
+    </div>
+    @if (Model.Any())
+    {
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+            @foreach (var a in Model)
+            {
+                var ended      = a.Status != "Active";
+                var hasBids    = a.BidCount > 0;
+                var bid        = hasBids ? a.CurrentBid : a.StartingBid;
+                var secsLeft   = (a.EndTime - DateTime.UtcNow).TotalSeconds;
+                var endingSoon = !ended && secsLeft > 0 && secsLeft < 3600;
+                var emoji      = a.Category switch { "Books" => "📚", "Tech" => "💻", "Furniture" => "🪑", "Clothing" => "👕", "Sports" => "🏋️", "Art" => "🎨", _ => "📦" };
+
+                <a href="/auctions/detail/@a.Id"
+                   class="card-hover bg-white rounded-2xl shadow-sm overflow-hidden block @(ended ? "opacity-75" : "")"
+                   data-auction="@a.Id">
+                    <div class="relative">
+                        <img src="@(a.CoverImageUrl ?? "https://picsum.photos/400/300")" class="h-36 md:h-44 w-full object-cover" alt="@a.Title">
+                        @if (ended)
+                        {
+                            <span class="absolute top-2 left-2 bg-gray-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">Ended</span>
+                        }
+                        else if (endingSoon)
+                        {
+                            <span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">🔥 Soon</span>
+                        }
+                        else if (a.BuyNowPrice.HasValue)
+                        {
+                            <span class="absolute top-2 left-2 bg-swamp-600 text-white text-xs font-bold px-2 py-0.5 rounded-full">Buy now</span>
+                        }
+                        else if (!hasBids)
+                        {
+                            <span class="absolute top-2 left-2 text-white text-xs font-bold px-2 py-0.5 rounded-full badge-new">New</span>
+                        }
+                        <span class="absolute top-2 right-2 bg-white/90 backdrop-blur text-swamp-700 text-xs font-semibold px-2 py-0.5 rounded-full shadow">@emoji @a.Category</span>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="font-semibold text-swamp-900 text-sm truncate">@a.Title</h3>
+                        <p class="text-xs text-swamp-500 mt-0.5">@a.Condition</p>
+                        <div class="mt-2 flex items-end justify-between">
+                            <div>
+                                <p class="text-xs text-swamp-500">@(ended ? "Final" : (hasBids ? "Current" : "Starting"))</p>
+                                <p class="text-lg font-bold text-swamp-700 bid-amount">$@bid</p>
+                            </div>
+                            <div class="text-right">
+                                @if (endingSoon)
+                                {
+                                    <p class="text-xs text-red-500 font-semibold" data-endtime="@a.EndTime.ToString("O")">@FormatTime(secsLeft)</p>
+                                }
+                                else
+                                {
+                                    <p class="text-xs text-swamp-500">@(ended ? "Ended" : FormatTime(secsLeft))</p>
+                                }
+                                <p class="text-xs text-swamp-400 bid-count">@(hasBids ? $"{a.BidCount} bids" : "No bids")</p>
+                            </div>
+                        </div>
+                        @if (ended && !string.IsNullOrEmpty(a.WinnerName))
+                        {
+                            <p class="text-xs text-swamp-500 mt-1">🏆 @a.WinnerName</p>
+                        }
+                        else if (!ended && a.BuyNowPrice.HasValue)
+                        {
+                            <p class="text-xs text-swamp-600 font-medium mt-1">Buy now: $@a.BuyNowPrice</p>
+                        }
+                    </div>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-16">
+            <p class="text-4xl mb-3">🪷</p>
+            <p class="font-semibold text-swamp-800">No listings found</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/auctionHub").withAutomaticReconnect().build();
+
+        connection.on('BidPlaced', bid => {
+            const el = document.querySelector(`[data-auction="${bid.auctionId}"]`);
+            if (el) {
+                el.querySelector('.bid-amount').textContent = '$' + bid.currentHighestBid;
+                el.querySelector('.bid-count').textContent = bid.bidCount + ' bids';
+            }
+        });
+        connection.on('NewAuction', () => location.reload());
+        connection.on('AuctionEnded', () => setTimeout(() => location.reload(), 2000));
+        connection.start();
+
+        setInterval(() => {
+            document.querySelectorAll('[data-endtime]').forEach(el => {
+                const s = Math.floor((new Date(el.dataset.endtime) - Date.now()) / 1000);
+                if (s <= 0) { el.textContent = 'Ended'; return; }
+                el.textContent = '00:' + String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+            });
+        }, 1000);
+    </script>
+}
+
+@functions {
+    string FormatTime(double secs)
+    {
+        if (secs <= 0) return "Ended";
+        int d = (int)(secs / 86400), h = (int)((secs % 86400) / 3600), m = (int)((secs % 3600) / 60);
+        return d > 0 ? $"{d}d {h}h" : h > 0 ? $"{h}h {m}m" : $"{m}m";
+    }
+}

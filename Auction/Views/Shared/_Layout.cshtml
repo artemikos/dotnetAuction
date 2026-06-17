@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] — Lily Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        swamp: {
+                            50: '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0', 300: '#86efac',
+                            400: '#4ade80', 500: '#22c55e', 600: '#16a34a', 700: '#15803d',
+                            800: '#166534', 900: '#14532d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 24px -6px rgba(21,128,61,0.15);
+            }
+
+        .filter-chip {
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+            .filter-chip.active {
+                background: #15803d;
+                color: white;
+                border-color: #15803d;
+            }
+
+        .badge-new {
+            background: linear-gradient(135deg,#22c55e,#15803d);
+        }
+
+        .status-chip {
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+            .status-chip.active {
+                background: #15803d;
+                color: white;
+                border-color: #15803d;
+            }
+
+        .live-dot {
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        .tab-btn {
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s;
+            cursor: pointer;
+        }
+
+            .tab-btn.active {
+                border-bottom-color: #16a34a;
+                color: #15803d;
+                font-weight: 600;
+            }
+    </style>
+</head>
+<body class="bg-swamp-50 min-h-screen">
+
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="/auctions" class="text-2xl font-bold text-swamp-600">Lily Market</a>
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <button type="button" onclick="toggleNotifications()" class="relative text-swamp-600 hover:text-swamp-800">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                            <span id="notif-badge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold">0</span>
+                        </button>
+                        <div id="notif-dropdown" class="hidden absolute right-0 top-10 w-80 bg-white rounded-2xl shadow-lg border border-swamp-100 py-2 z-50 max-h-96 overflow-y-auto">
+                            <div class="flex items-center justify-between px-4 py-2 border-b border-swamp-50">
+                                <p class="text-sm font-semibold text-swamp-800">Notifications</p>
+                                <button onclick="clearNotifications()" class="text-xs text-swamp-500 hover:text-red-500">Clear all</button>
+                            </div>
+                            <div id="notif-list"><p class="text-xs text-swamp-400 px-4 py-3">No notifications yet</p></div>
+                        </div>
+                    </div>
+                    <a href="/auctions/create" class="bg-swamp-500 text-white px-6 py-2 rounded-full hover:bg-swamp-600 font-medium text-sm">+ New Listing</a>
+                    <div id="profile-widget">
+                        <button id="signin-btn" onclick="openAuthModal()" class="flex items-center gap-1.5 text-swamp-600 hover:text-swamp-800 font-medium text-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> Sign in
+                        </button>
+                        <div id="user-info" class="hidden flex items-center gap-2">
+                            <span id="user-name" class="text-sm font-medium text-swamp-700"></span>
+                            <button onclick="logout()" class="text-xs text-red-500 hover:text-red-700">Sign out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>@RenderBody()</main>
+
+    @await Html.PartialAsync("_AuthModal")
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        // Уведомления с сохранением в localStorage
+        var notifications = JSON.parse(localStorage.getItem('auction_notifications') || '[]');
+
+        window.addNotification = function(type, message, auctionId) {
+            notifications.unshift({ type: type, message: message, auctionId: auctionId, time: new Date().toISOString() });
+            localStorage.setItem('auction_notifications', JSON.stringify(notifications));
+            updateBadge();
+        };
+
+        function updateBadge() {
+            var b = document.getElementById('notif-badge');
+            if (notifications.length > 0) { b.textContent = notifications.length; b.classList.remove('hidden'); }
+            else b.classList.add('hidden');
+        }
+
+        function toggleNotifications() {
+            var d = document.getElementById('notif-dropdown'); d.classList.toggle('hidden');
+            if (!d.classList.contains('hidden')) renderNotifications();
+        }
+
+        function renderNotifications() {
+            var l = document.getElementById('notif-list');
+            if (notifications.length === 0) { l.innerHTML = '<p class="text-xs text-swamp-400 px-4 py-3">No notifications yet</p>'; return; }
+            l.innerHTML = notifications.map(function(n) {
+                var icon = n.type === 'Won' ? '🏆' : n.type === 'Outbid' ? '⚠️' : n.type === 'Ended' ? '🏁' : n.type === 'BidPlaced' ? '💰' : n.type === 'Sold' ? '💵' : n.type === 'NoBids' ? '📭' : n.type === 'NewAuction' ? '🆕' : '🔔';
+                return '<a href="/auctions/detail/' + (n.auctionId || '') + '" class="flex items-start gap-2 px-4 py-2.5 hover:bg-swamp-50 text-sm"><span class="text-lg">' + icon + '</span><div><p class="text-swamp-700 leading-snug">' + n.message + '</p><p class="text-xs text-swamp-400 mt-0.5">' + formatNotifTime(n.time) + '</p></div></a>';
+            }).join('');
+            updateBadge();
+        }
+
+        function clearNotifications() {
+            notifications = [];
+            localStorage.removeItem('auction_notifications');
+            updateBadge();
+            renderNotifications();
+        }
+
+        function formatNotifTime(isoString) {
+            var date = new Date(isoString);
+            var diff = Math.floor((new Date() - date) / 1000);
+            if (diff < 60) return 'just now';
+            if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+            if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+            return date.toLocaleDateString();
+        }
+
+        document.addEventListener('click', function(e) {
+            var d = document.getElementById('notif-dropdown');
+            if (d && !d.classList.contains('hidden') && !e.target.closest('#notif-dropdown') && !e.target.closest('button[onclick="toggleNotifications()"]')) d.classList.add('hidden');
+        });
+
+        // SignalR для уведомлений
+        var notifConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/auctionHub", { accessTokenFactory: function() { return localStorage.getItem('token') || ''; } })
+            .withAutomaticReconnect().build();
+
+        notifConnection.on('BidPlaced',     function(b) { addNotification('BidPlaced', 'New bid: $' + b.amount + ' by ' + b.bidderName, b.auctionId); });
+        notifConnection.on('Outbid',        function(d) { addNotification('Outbid', d.Message || 'You have been outbid!', d.AuctionId); });
+        notifConnection.on('AuctionWon',    function(d) { addNotification('Won', d.Message || 'You won!', d.AuctionId); });
+        notifConnection.on('AuctionEnded',  function(d) { addNotification('Ended', 'Auction ended: ' + (d.title || ''), d.id); });
+        notifConnection.on('AuctionSold',   function(d) { addNotification('Sold', 'Auction sold!', d.auctionId); });
+        notifConnection.on('NewAuction',    function(a) { addNotification('NewAuction', 'New listing: ' + a.title, a.id); });
+        notifConnection.on('AuctionEnding', function(d) { addNotification('Ending', d.Message || 'Auction ending soon!', d.AuctionId); });
+        notifConnection.on('NoBidsEnded',   function(d) { addNotification('NoBids', d.Message || 'No bids', d.AuctionId); });
+        notifConnection.on('SaleConfirmed', function(d) { addNotification('Sold', d.Message || 'Sale confirmed', d.AuctionId); });
+
+        notifConnection.start().then(function() {
+            updateBadge();
+            var match = window.location.pathname.match(/\/auctions\/detail\/(\d+)/);
+            if (match) {
+                notifConnection.invoke('JoinAuctionGroup', parseInt(match[1])).catch(function(){});
+            }
+        }).catch(function(){});
+
+        // Auth Modal
+        function openAuthModal() { document.getElementById('auth-modal').classList.remove('hidden'); }
+        function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); document.getElementById('auth-error').classList.add('hidden'); }
+        document.addEventListener('click', function(e) { if (e.target.id === 'auth-modal') closeAuthModal(); });
+        function switchAuthTab(tab) {
+            document.querySelectorAll('#auth-modal .tab-btn').forEach(function(b) {
+                var a = b.textContent.trim().toLowerCase().startsWith(tab);
+                b.classList.toggle('active', a); b.classList.toggle('text-swamp-700', a); b.classList.toggle('text-swamp-400', !a);
+            });
+            document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+            document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+            document.getElementById('auth-error').classList.add('hidden');
+        }
+        function showAuthError(m) { var e = document.getElementById('auth-error'); e.textContent = m; e.classList.remove('hidden'); }
+        async function handleLogin() {
+            var r = await fetch('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: document.getElementById('login-email').value, password: document.getElementById('login-password').value }) });
+            var d = await r.json();
+            if (!r.ok) { showAuthError(d.message || 'Invalid credentials'); return; }
+            localStorage.setItem('token', d.token); localStorage.setItem('user', JSON.stringify(d.user));
+            closeAuthModal(); location.reload();
+        }
+        async function handleRegister() {
+            var p = document.getElementById('reg-password').value;
+            if (p.length < 6) { showAuthError('Password must be at least 6 characters'); return; }
+            var r = await fetch('/api/auth/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ displayName: document.getElementById('reg-name').value, email: document.getElementById('reg-email').value, password: p }) });
+            var d = await r.json();
+            if (!r.ok) { showAuthError(d.message || 'Registration failed'); return; }
+            localStorage.setItem('token', d.token); localStorage.setItem('user', JSON.stringify(d.user));
+            closeAuthModal(); location.reload();
+        }
+        function logout() { localStorage.removeItem('token'); localStorage.removeItem('user'); location.reload(); }
+        function updateAuthUI() {
+            var u = JSON.parse(localStorage.getItem('user') || 'null');
+            document.getElementById('signin-btn').classList.toggle('hidden', !!u);
+            document.getElementById('user-info').classList.toggle('hidden', !u);
+            if (u) document.getElementById('user-name').textContent = u.displayName;
+        }
+        updateAuthUI();
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿<div id="auth-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md shadow-2xl">
+        <div class="p-6">
+            <div class="text-center mb-4">
+                <span class="text-3xl">🐸</span>
+                <h2 class="text-xl font-bold text-swamp-800 mt-1">Lily Market</h2>
+            </div>
+
+            <div class="flex border-b border-swamp-100 mb-4">
+                <button class="tab-btn active flex-1 py-2 text-sm text-swamp-700" onclick="switchAuthTab('login')">Sign In</button>
+                <button class="tab-btn flex-1 py-2 text-sm text-swamp-400" onclick="switchAuthTab('register')">Register</button>
+            </div>
+
+            <div id="auth-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl p-3 mb-3"></div>
+
+            <div id="login-form" class="space-y-3">
+                <input id="login-email" type="email" placeholder="student@university.edu"
+                       class="w-full border-2 border-swamp-200 rounded-xl px-4 py-2.5 text-sm focus:border-swamp-500 focus:outline-none" required>
+                <input id="login-password" type="password" placeholder="Password"
+                       class="w-full border-2 border-swamp-200 rounded-xl px-4 py-2.5 text-sm focus:border-swamp-500 focus:outline-none" required>
+                <button type="button" onclick="handleLogin()" class="w-full bg-swamp-500 text-white py-2.5 rounded-full font-semibold text-sm hover:bg-swamp-600">Sign In</button>
+            </div>
+
+            <div id="register-form" class="hidden space-y-3">
+                <input id="reg-name" type="text" placeholder="Display name"
+                       class="w-full border-2 border-swamp-200 rounded-xl px-4 py-2.5 text-sm focus:border-swamp-500 focus:outline-none" required>
+                <input id="reg-email" type="email" placeholder="student@university.edu"
+                       class="w-full border-2 border-swamp-200 rounded-xl px-4 py-2.5 text-sm focus:border-swamp-500 focus:outline-none" required>
+                <input id="reg-password" type="password" placeholder="Password (min 6 characters)"
+                       class="w-full border-2 border-swamp-200 rounded-xl px-4 py-2.5 text-sm focus:border-swamp-500 focus:outline-none" required minlength="6">
+                <button type="button" onclick="handleRegister()" class="w-full bg-swamp-500 text-white py-2.5 rounded-full font-semibold text-sm hover:bg-swamp-600">Create Account</button>
+            </div>
+
+            <button onclick="closeAuthModal()" class="w-full text-swamp-500 text-sm mt-3 py-1">Cancel</button>
+        </div>
+    </div>
+</div>

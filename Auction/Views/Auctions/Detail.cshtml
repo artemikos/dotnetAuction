@@ -1,0 +1,169 @@
+@model Auction.DTOs.AuctionDetailDto
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "_Layout";
+    var currentUserId = ViewBag.CurrentUserId as int?;
+}
+
+<div class="max-w-3xl mx-auto">
+
+    @if (Model.PhotoUrls.Any())
+    {
+    <div class="relative bg-white overflow-hidden" style="height:280px;">
+        <img src="@Model.PhotoUrls.First()" class="w-full h-full object-cover" alt="@Model.Title">
+        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur text-swamp-700 text-xs font-semibold px-2.5 py-1 rounded-full">@Model.Category</div>
+    </div>
+    }
+
+    <div class="px-4 pt-4">
+
+        <div class="bg-white rounded-2xl p-4 mb-3 shadow-sm">
+            <div class="flex items-start justify-between gap-2">
+                <h1 class="text-lg font-bold text-swamp-900">@Model.Title</h1>
+                <span class="bg-swamp-100 text-swamp-700 text-xs font-semibold px-2.5 py-1 rounded-full">@Model.Condition</span>
+            </div>
+            <div class="flex items-center gap-2 mt-2.5">
+                <div class="w-8 h-8 rounded-full bg-swamp-200 flex items-center justify-center text-swamp-700 font-bold text-xs">@(Model.SellerName?.FirstOrDefault() ?? '?')</div>
+                <p class="text-xs font-semibold text-swamp-800">@Model.SellerName</p>
+            </div>
+            <div class="flex items-center gap-1.5 mt-3 bg-swamp-50 rounded-xl px-3 py-2">
+                <svg class="w-4 h-4 text-swamp-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <span class="text-xs text-swamp-600 font-medium">Pickup: @Model.PickupLocation</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-4 mb-3 shadow-sm">
+            <div class="text-center mb-4">
+                <p class="text-xs text-swamp-500 font-medium uppercase tracking-wide">@(Model.Status != "Active" ? "Final price" : "Current bid")</p>
+                <p class="text-4xl font-bold text-swamp-800 mt-0.5" id="current-bid">$@Model.CurrentBid</p>
+                <p class="text-xs text-swamp-400 mt-0.5" id="bid-info">
+                    @if (Model.Status != "Active" && Model.WinnerName != null) { <span>Winner: @Model.WinnerName</span> }
+                    else { <span>@Model.BidCount bids · Min increment: $@Model.MinimumIncrement</span> }
+                </p>
+            </div>
+
+            @if (Model.Status == "Active")
+            {
+            <div id="bid-form">
+                <p class="text-xs text-swamp-500 mb-1.5">Minimum next bid: <span class="font-bold text-swamp-700">$@(Model.CurrentBid + Model.MinimumIncrement)</span></p>
+                <div class="flex gap-2">
+                    <input type="number" id="bid-amount" class="flex-1 border-2 border-swamp-200 rounded-xl px-3 py-3 text-base font-semibold text-swamp-900 focus:border-swamp-500 focus:outline-none" min="@(Model.CurrentBid + Model.MinimumIncrement)" value="@(Model.CurrentBid + Model.MinimumIncrement)">
+                    <button id="place-bid-btn" class="bg-swamp-500 hover:bg-swamp-600 text-white font-bold px-5 py-3 rounded-xl text-sm whitespace-nowrap">Place Bid</button>
+                </div>
+                @if (Model.BuyNowPrice.HasValue) { <button id="buy-now-btn" class="w-full mt-2 bg-swamp-700 text-white py-2 rounded-xl text-sm font-semibold">Buy Now — $@Model.BuyNowPrice</button> }
+            </div>
+            }
+        </div>
+
+        <div id="edit-delete-btns" class="hidden flex gap-2 mb-3">
+            <a href="/auctions/edit/@Model.Id" class="flex-1 text-center bg-swamp-100 text-swamp-700 py-2 rounded-xl text-sm font-semibold">Edit</a>
+            <button id="delete-btn" class="flex-1 bg-red-500 text-white py-2 rounded-xl text-sm font-semibold">Delete</button>
+        </div>
+
+        <button id="confirm-sale-btn" class="hidden w-full mb-3 bg-swamp-600 text-white py-2 rounded-xl text-sm font-semibold">Confirm Sale ✅</button>
+
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden mb-3">
+            <div class="flex border-b border-swamp-100">
+                <button id="tab-desc" class="flex-1 py-3 text-sm text-swamp-700 font-semibold border-b-2 border-swamp-500">Description</button>
+                <button id="tab-bids" class="flex-1 py-3 text-sm text-swamp-500">Bid History <span id="bid-count-badge" class="bg-swamp-100 text-swamp-700 text-xs px-1.5 py-0.5 rounded-full ml-1">@Model.BidCount</span></button>
+            </div>
+            <div id="panel-desc" class="p-4"><p class="text-sm text-swamp-700">@Model.Description</p></div>
+            <div id="panel-bids" class="hidden">
+                <div id="bid-history" class="divide-y divide-swamp-50 max-h-64 overflow-y-auto">
+                    @foreach (var bid in Model.RecentBids.OrderByDescending(b => b.Amount)) { <div class="flex justify-between px-4 py-2.5 text-sm"><span class="text-swamp-700 font-medium">@bid.BidderName</span><span class="font-bold text-swamp-800">$@bid.Amount</span></div> }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const auctionId = @Model.Id;
+        const auctionStatus = '@Model.Status';
+        const sellerId = @Model.SellerId;
+        const minimumIncrement = @Model.MinimumIncrement.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        const bidCount = @Model.BidCount;
+        const buyNowPrice = @(Model.BuyNowPrice?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "null");
+
+        async function api(url, method = 'POST', body = null) {
+            const token = localStorage.getItem('token');
+            const headers = { 'Authorization': 'Bearer ' + token };
+            if (body) headers['Content-Type'] = 'application/json';
+            const res = await fetch(url, { method, headers, body: body ? JSON.stringify(body) : null });
+            if (!res.ok) { const err = await res.json(); alert(err.message); return null; }
+            return res.json();
+        }
+
+        function switchTab(name) {
+            const d = document.getElementById('panel-desc'), b = document.getElementById('panel-bids');
+            const td = document.getElementById('tab-desc'), tb = document.getElementById('tab-bids');
+            const active = 'flex-1 py-3 text-sm text-swamp-700 font-semibold border-b-2 border-swamp-500';
+            const inactive = 'flex-1 py-3 text-sm text-swamp-500';
+            if (name === 'desc') { d.classList.remove('hidden'); b.classList.add('hidden'); td.className = active; tb.className = inactive; }
+            else { b.classList.remove('hidden'); d.classList.add('hidden'); tb.className = active; td.className = inactive; }
+        }
+
+        async function placeBid(amount) {
+            const token = localStorage.getItem('token');
+            if (!token) { openAuthModal(); return; }
+            const amt = amount || parseFloat(document.getElementById('bid-amount').value);
+            if (!amt || isNaN(amt)) return;
+            await api('/api/auctions/' + auctionId + '/bids', 'POST', { amount: amt });
+        }
+
+        async function confirmSale() {
+            const token = localStorage.getItem('token');
+            if (!token) { openAuthModal(); return; }
+            if (await api('/api/auctions/' + auctionId + '/confirm-sale', 'POST')) location.reload();
+        }
+
+        async function deleteAuction() {
+            const token = localStorage.getItem('token');
+            if (!token || !confirm('Delete this auction?')) return;
+            if (await api('/api/auctions/' + auctionId, 'DELETE')) location.href = '/auctions';
+        }
+
+        var btn = document.getElementById('place-bid-btn');
+        if (btn) btn.onclick = () => placeBid();
+
+        var buyBtn = document.getElementById('buy-now-btn');
+        if (buyBtn) buyBtn.onclick = () => placeBid(buyNowPrice);
+
+        var delBtn = document.getElementById('delete-btn');
+        if (delBtn) delBtn.onclick = deleteAuction;
+
+        var confBtn = document.getElementById('confirm-sale-btn');
+        if (confBtn) confBtn.onclick = confirmSale;
+
+        var tabD = document.getElementById('tab-desc');
+        if (tabD) tabD.onclick = () => switchTab('desc');
+
+        var tabB = document.getElementById('tab-bids');
+        if (tabB) tabB.onclick = () => switchTab('bids');
+
+        const token = localStorage.getItem('token');
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/auctionHub", { accessTokenFactory: () => token || '' })
+            .withAutomaticReconnect()
+            .build();
+
+        connection.on('BidPlaced', bid => {
+            document.getElementById('current-bid').textContent = '$' + bid.currentHighestBid;
+            const inp = document.getElementById('bid-amount');
+            if (inp) { const next = bid.currentHighestBid + minimumIncrement; inp.min = next; inp.value = next; }
+            document.getElementById('bid-history').insertAdjacentHTML('afterbegin', `<div class="flex justify-between px-4 py-2.5 text-sm bg-swamp-50"><span>${bid.bidderName}</span><span class="font-bold">$${bid.amount}</span></div>`);
+            const badge = document.getElementById('bid-count-badge'); if (badge) badge.textContent = bid.bidCount;
+        });
+
+        connection.on('AuctionEnded', () => location.reload());
+        connection.on('AuctionSold', () => location.reload());
+
+        connection.start().then(() => {
+            connection.invoke('JoinAuctionGroup', auctionId).catch(() => {});
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            if (auctionStatus === 'Ended' && user && user.id == sellerId) document.getElementById('confirm-sale-btn').classList.remove('hidden');
+            if (auctionStatus === 'Active' && user && user.id == sellerId && bidCount == 0) document.getElementById('edit-delete-btns').classList.remove('hidden');
+        });
+    </script>
+}
